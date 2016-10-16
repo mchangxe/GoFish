@@ -1,4 +1,3 @@
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -12,7 +11,7 @@ import static org.junit.Assert.*;
 public class GoFishGamesTest {
 
 
-    GoFishGames newGameTest = new GoFishGames(4);
+    GoFishGames newGameTest = new GoFishGames(2,2);
 
 
     /**
@@ -21,12 +20,16 @@ public class GoFishGamesTest {
      */
     @Test
     public void createPlayers() throws Exception {
-        newGameTest.createPlayers(4);
-        Player[] answer = new Player[4];
-        for (int i=0; i<4; i++){
-            answer[i] = new Player(0, i+1);
+        newGameTest.createPlayers(2,2);
+        cpu[] answer = new cpu[4];
+        for (int i=0; i<2; i++){
+            answer[i] = new StupidPlayer(0, i+1);
         }
-        assertArrayEquals(newGameTest.getAllPlayers(), answer);
+        for (int u=2; u<4; u++){
+            answer[u] = new SmartPlayer(0, u+1);
+        }
+
+        assertArrayEquals(answer, newGameTest.getAllPlayers());
     }
 
     /**
@@ -36,8 +39,8 @@ public class GoFishGamesTest {
     @Test
     public void createPlayers2() throws Exception {
         //even though Main() will never allow number of players to be 0
-        newGameTest.createPlayers(0);
-        Player[] answer = new Player[0];
+        newGameTest.createPlayers(0,0);
+        SmartPlayer[] answer = new SmartPlayer[0];
         assertArrayEquals(newGameTest.getAllPlayers(), answer);
     }
 
